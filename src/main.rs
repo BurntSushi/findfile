@@ -29,15 +29,10 @@ fn main() {
         Err(why) => println!("! {:?}", why.kind()),
         Ok(paths) => for path in paths {
             println!("> {:?}", path.unwrap().path());
+            match cat(&Path::new(path.to_str() + "/name")) {
+                Err(why) => println!("! {:?}", why.kind()),
+                Ok(s) => println!("> {}", s),
+            }
         },
     }
-
-    for path in paths {
-        match cat(&Path::new(path)) {
-            Err(why) => println!("! {:?}", why.kind()),
-            Ok(s) => println!("> {}", s),
-    }
-        }
-    }
-
 }
